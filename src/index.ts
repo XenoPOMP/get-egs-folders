@@ -18,27 +18,17 @@ export const getEgsMainLocation = async (): Promise<false | string> => {
     return cacheEgsMainLocation;
   }
 
-  const getCorrectPath = (path: string | false): string | false => {
-    return path;
-
-    // if (path === false) {
-    //   return false;
-    // }
-    //
-    // return join(path, '../../');
+  const sharedGetInstallPathOptions: Parameters<typeof getInstallPath>[1] = {
+    key: 'AppDataPath',
   };
 
   const egsPath = isWin
-    ? getCorrectPath(
-        await getInstallPath(REG_EGS_PATH_32, {
-          key: 'Path',
-        })
-      ) ||
-      getCorrectPath(
-        await getInstallPath(REG_EGS_PATH_64, {
-          key: 'Path',
-        })
-      )
+    ? (await getInstallPath(REG_EGS_PATH_32, {
+        ...sharedGetInstallPathOptions,
+      })) ||
+      (await getInstallPath(REG_EGS_PATH_64, {
+        ...sharedGetInstallPathOptions,
+      }))
     : null;
 
   if (!egsPath) {
