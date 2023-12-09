@@ -95,9 +95,20 @@ export const getAllEgsGames = async (
 
   const pathToManifests = join(egsMainLocation, 'Manifests');
 
+  logger.log(`Path to manifest: ${pathToManifests}`);
+
   const files = (await readdir(pathToManifests, { withFileTypes: true }))
     .filter(item => item.isFile())
     .filter(item => /^.*\.item$/gi.test(item.name));
+
+  logger.log(
+    `All files/directories: [${(
+      await readdir(pathToManifests, { withFileTypes: true })
+    )
+      .filter(item => item.isFile())
+      .map(file => file.name)}]`
+  );
+  logger.log(`Files: [${files.map(file => file.name)}]`);
 
   await Promise.all(
     files.map(async file => {
