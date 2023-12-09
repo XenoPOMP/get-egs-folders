@@ -1,7 +1,7 @@
 {
   "name": "get-egs-folders",
   "type": "module",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "",
   "author": "XenoPOMP",
   "license": "MIT",
@@ -47,6 +47,7 @@
   "devDependencies": {
     "@ririd/eslint-config": "^0.6.0",
     "@trivago/prettier-plugin-sort-imports": "^4.2.0",
+    "@types/cli-color": "^2.0.6",
     "@types/node": "^18.15.11",
     "@xenopomp/advanced-types": "^1.5.0",
     "bumpp": "^9.1.0",
@@ -61,5 +62,8 @@
   },
   "lint-staged": {
     "*": "eslint --fix"
+  },
+  "dependencies": {
+    "cli-color": "^2.0.3"
   }
 }

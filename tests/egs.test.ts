@@ -8,21 +8,25 @@ import { getAllEgsGames, getEgsMainLocation } from '../src';
 export class EgsTest {
   @Test('Get main installation path')
   async getMain() {
-    await expect.not.toThrowAsync(async () => {
-      const res = await getEgsMainLocation();
+    // await expect.not.toThrowAsync(async () => {
+    //
+    // });
 
-      console.log({
-        path: res,
-      });
+    const res = await getEgsMainLocation({
+      debug: true,
     });
+
+    // console.log({
+    //   path: res,
+    // });
   }
 
   @Test('Get all EGS games')
   async getAll() {
-    await expect.not.toThrowAsync(async () => {
-      const res = await getAllEgsGames();
-
-      console.log(res);
+    const res = await getAllEgsGames({
+      debug: true,
     });
+
+    // console.log(res);
   }
 }
