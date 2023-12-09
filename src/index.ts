@@ -113,22 +113,20 @@ export const getAllEgsGames = async (
   const tasks = files.map(async file => {
     logger.log(`Now processing ${JSON.stringify(file, null, 2)}`);
 
-    if ('path' in file && typeof file.path === 'string') {
-      const pathToFile = join(file['path'], file.name);
+    const pathToFile = join(pathToManifests, file.name);
 
-      const {
-        DisplayName: displayingName,
-        InstallSize: size,
-        InstallLocation: path,
-      } = await parseEgsDataItem(pathToFile, {
-        debug: options?.debug ?? false,
-      });
+    const {
+      DisplayName: displayingName,
+      InstallSize: size,
+      InstallLocation: path,
+    } = await parseEgsDataItem(pathToFile, {
+      debug: options?.debug ?? false,
+    });
 
-      res[displayingName] = {
-        path,
-        size,
-      };
-    }
+    res[displayingName] = {
+      path,
+      size,
+    };
   });
 
   await Promise.all(tasks);
