@@ -14,7 +14,7 @@ let cacheEgsMainLocation: string | null = null;
 let cacheEgsLibraryLocations: string[] | null = null;
 let cacheEgsGameLocations: Record<string, string> | null = null;
 
-interface SharedProps {
+export interface SharedProps {
   debug?: boolean;
 }
 
@@ -119,7 +119,9 @@ export const getAllEgsGames = async (
           DisplayName: displayingName,
           InstallSize: size,
           InstallLocation: path,
-        } = await parseEgsDataItem(pathToFile);
+        } = await parseEgsDataItem(pathToFile, {
+          debug: options?.debug ?? false,
+        });
 
         res[displayingName] = {
           path,
